@@ -34,12 +34,12 @@
 
   - pip3 install flask-sqlalchemy
   - python3
-    > from BookModel import app , db
-    > db.createAll() // app.app_context().push() >>> db.create_all()
-    > exit()
+    - from BookModel import app , db
+    - db.createAll() // app.app_context().push() >>> db.create_all()
+    - exit()
   - To test the database
-    > from BookModel import *
-    > Book.add_book("book name", 1.99, 123455)
+    - from BookModel import *
+    - Book.add_book("book name", 1.99, 123455)
     
   ### In order to do some fronten dev we should enable cors
   - Add to settings.py: app.config['CORS_HEADERS'] = 'Content-Type'
