@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddBookMutation, useEditBookMutation, useGetBookQuery } from "../../api/bookApi";
+import { useAddBookMutation, useEditBookMutation, useGetBookQuery } from "../../service/bookApi";
 import { BookHook } from "../book";
 
 export default function useBookForm(_isbn: string | undefined): BookHook {

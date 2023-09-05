@@ -1,17 +1,15 @@
 import { Fragment } from "react";
-import { Table } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useGetBooksQuery } from "../service/bookApi";
-import DeleteBook from "./delete/DeleteBook.component";
+import useMoreBooks from "./MoreBooks.hook";
 
-export default function BookList() {
+export default function MoreBookList() {
 
-    const { data, error } = useGetBooksQuery();
+    const { moreBooks, fetching } = useMoreBooks();
 
-    if (error) {
-        return <h1 data-testid="errorMessage">Error</h1>;
-    }
+    if (fetching)
+        return <Spinner />
 
     return <Fragment>
         <Row className="mb-3">
@@ -34,7 +32,7 @@ export default function BookList() {
                 </tr>
             </thead>
             <tbody>
-                {data?.map((row) => (
+                {moreBooks?.map((row) => (
                     <tr
                         key={row.isbn}
                         data-testid={row.isbn}
@@ -43,13 +41,13 @@ export default function BookList() {
                         <td>{row.name}</td>
                         <td align="right">{row.price}</td>
                         <td align="center">
-                            <DeleteBook
+                            {/* <DeleteBook
                                 isbn={row.isbn} />
                             <Link className="btn btn-primary" to={"form/" + row.isbn.toString()}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pen" viewBox="0 0 16 16">
                                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
                                 </svg>
-                            </Link>
+                            </Link> */}
                         </td>
                     </tr>
                 ))}

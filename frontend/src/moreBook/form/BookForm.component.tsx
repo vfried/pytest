@@ -2,17 +2,17 @@
 import React from "react";
 import { Form, Row, Button, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import useMoreBookForm from "../../moreBook/form/BookForm.hook";
+import useBookForm from "./BookForm.hook";
 
 
-export default function BookForm() {
+export default function MoreBookForm() {
 
     const { _isbn } = useParams();
 
     const {
         book: { name, isbn, price },
         setBook: { setName, setIsbn, setPrice },
-        isLoading, handleSubmit } = useMoreBookForm(_isbn);
+        isLoading, handleSubmit } = useBookForm(_isbn);
 
     return <React.Fragment>
         <h2 className="pb-3">{_isbn ? "Add" : "Edit"} Book</h2>

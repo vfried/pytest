@@ -1,12 +1,11 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Book from '../book/book';
+import { apiService } from './api';
 
-export const bookApi = createApi({
-    reducerPath: 'book',
-    tagTypes: ['Book'],
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'http://127.0.0.1:5001/',
-    }),
+export const bookApi = apiService.enhanceEndpoints({
+    addTagTypes: ['Book']
+});
+
+const injectEndpoints = bookApi.injectEndpoints({
     endpoints: (builder) => ({
         getBooks: builder.query<Book[], void>({
             query: () => `books`,
@@ -45,6 +44,6 @@ export const bookApi = createApi({
             invalidatesTags: ['Book']
         }),
     })
-});
+})
 
-export const { useGetBooksQuery, useGetBookQuery, useAddBookMutation, useEditBookMutation, useDeleteBookMutation } = bookApi;
+export const { useGetBooksQuery, useGetBookQuery, useAddBookMutation, useEditBookMutation, useDeleteBookMutation } = injectEndpoints;

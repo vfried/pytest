@@ -1,6 +1,6 @@
 import { useCallback } from "react"
 import { Button } from "react-bootstrap"
-import { useDeleteBookMutation } from "../../api/bookApi"
+import { useDeleteBookMutation } from "../../service/bookApi"
 
 
 const DeleteBook: React.FC<{ isbn: number }> = ({ isbn }) => {

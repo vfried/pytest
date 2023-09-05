@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
-import { useGetBooksQuery } from "../api/bookApi";
+import { useGetBooksQuery } from "../service/bookApi";
 import BookList from "./BookList.component";
 
 jest.mock("../api/bookApi", () => ({
