@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import { useGetBooksQuery } from "../api/bookApi";
 import BookList from "./BookList.component";
@@ -21,27 +21,27 @@ describe("BookListTest", () => {
 
         expect(getByRole('heading', {
                 name: /book list/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(getByRole('link', {
                 name: /add book/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(getByRole('columnheader', {
                 name: /isbn/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(getByRole('columnheader', {
                 name: /name/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(getByRole('columnheader', {
                 name: /price/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(getByRole('columnheader', {
                 name: /actions/i
-            })).toBeDefined();
+            })).toBeVisible();
 
         expect(queryByTestId("123456789")).toBeNull();
     });
@@ -55,13 +55,13 @@ describe("BookListTest", () => {
         expect(getByTestId(book.isbn)).toBeDefined();
         expect(getByRole('cell', {
             name: book.name
-          })).toBeDefined();
+          })).toBeVisible();
         expect(getByRole('cell', {
             name: book.price.toString()
-        })).toBeDefined();
+        })).toBeVisible();
         expect(getByRole('cell', {
             name: 'DeleteButton'
-            })).toBeDefined();
+            })).toBeVisible();
     });
 
     it("Renders error", () => {

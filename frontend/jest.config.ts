@@ -15,6 +15,9 @@ export default {
   
     // Indicates which provider should be used to instrument code for coverage
     coverageProvider: "v8",
+
+    // Add jsdom testing options.
+    setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
   
     // The test environment that will be used for testing
     // testEnvironment: "jest-environment-node",

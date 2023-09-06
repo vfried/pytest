@@ -6,7 +6,7 @@
     "scripts": {
         "start": "webpack-dev-server .",
         "build": "webpack .",
-        "test": "jest --env=jsdom",
+        "test": "jest",
         "lint": "eslint --ext js,ts,tsx,snap src",
         "lint-css": "stylelint --fix \"src/**/*.{js,ts,tsx,css}\" \"!src/**/__tests__/**\""
     },
