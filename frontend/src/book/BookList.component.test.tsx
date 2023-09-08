@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { HashRouter } from "react-router-dom";
 import { useGetBooksQuery } from "../api/bookApi";
 import BookList from "./BookList.component";
@@ -16,28 +16,62 @@ describe("BookListTest", () => {
     })
 
     it("Renders an empty list", () => {
-        const { container } = render(<HashRouter><BookList /></HashRouter>);
+        const { getByRole, queryByTestId } = setup();
         // screen.logTestingPlaygroundURL() --> logs the test background
-        expect(screen.queryByTestId("123456789")).toBeNull();
-        //expect(container).toMatchSnapshot();
+
+        expect(getByRole('heading', {
+                name: /book list/i
+            })).toBeVisible();
+
+        expect(getByRole('link', {
+                name: /add book/i
+            })).toBeVisible();
+
+        expect(getByRole('columnheader', {
+                name: /isbn/i
+            })).toBeVisible();
+
+        expect(getByRole('columnheader', {
+                name: /name/i
+            })).toBeVisible();
+
+        expect(getByRole('columnheader', {
+                name: /price/i
+            })).toBeVisible();
+
+        expect(getByRole('columnheader', {
+                name: /actions/i
+            })).toBeVisible();
+
+        expect(queryByTestId("123456789")).toBeNull();
     });
 
     it("Renders a list", () => {
+        const book = { name: "Test book", isbn: 123456789, price: 10.55 };
         jest.mocked(useGetBooksQuery)
-            .mockReturnValueOnce({ data: [{ name: "Test book", isbn: 123456789, price: 10.55 }], error: undefined } as any)
-        const { container } = render(<HashRouter><BookList /></HashRouter>);
-        // screen.logTestingPlaygroundURL() --> logs the test background
-        expect(screen.getByTestId("123456789")).toBeDefined();
-        // expect(container).toMatchSnapshot();
+            .mockReturnValueOnce({ data: [book], error: undefined } as any)
+        const { getByRole, getByTestId } = setup();
+
+        expect(getByTestId(book.isbn)).toBeDefined();
+        expect(getByRole('cell', {
+            name: book.name
+          })).toBeVisible();
+        expect(getByRole('cell', {
+            name: book.price.toString()
+        })).toBeVisible();
+        expect(getByRole('cell', {
+            name: 'DeleteButton'
+            })).toBeVisible();
     });
 
     it("Renders error", () => {
         jest.mocked(useGetBooksQuery)
             .mockReturnValueOnce({ data: [], error: "OMG ERROR" } as any);
-        const { container } = render(<HashRouter><BookList /></HashRouter>);
-        // screen.logTestingPlaygroundURL() --> logs the test background
-        expect(screen.getByTestId("errorMessage"));
-        // expect(container).toMatchSnapshot();
+        const { getByTestId } = setup();
+        expect(getByTestId("errorMessage"));
     });
-
 });
+
+function setup() {
+    return render(<HashRouter><BookList /></HashRouter>)
+}
