@@ -1,12 +1,14 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { Spinner, Table } from "react-bootstrap";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useMoreBooks from "./MoreBooks.hook";
+import { MoreBookContextWrapper, useMoreBookContext } from "./MoreBook.context";
 
-export default function MoreBookList() {
+const MoreBook: React.FC = () => {
 
-    const { moreBooks, fetching } = useMoreBooks();
+    const moreBooks = useMoreBookContext();
+    const { fetching } = useMoreBooks();
 
     if (fetching)
         return <Spinner />
@@ -54,4 +56,10 @@ export default function MoreBookList() {
             </tbody>
         </Table>
     </Fragment>
+}
+
+export default function MoreBookList() {
+    return <MoreBookContextWrapper>
+        <MoreBook />
+    </MoreBookContextWrapper>
 }

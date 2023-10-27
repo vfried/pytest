@@ -29,6 +29,10 @@ const moreBookSlice = createSlice({
             ]
         },
     }
-})
+});
+
+//export type IMoreBookSlice = typeof moreBookSlice;
+export type IMoreBookSlice = typeof initialState;
+
 export const { setMoreBooks } = moreBookSlice.actions;
 export const moreBooksReducer = moreBookSlice.reducer;

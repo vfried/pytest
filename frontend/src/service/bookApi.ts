@@ -8,8 +8,7 @@ export const bookApi = apiService.enhanceEndpoints({
 const injectEndpoints = bookApi.injectEndpoints({
     endpoints: (builder) => ({
         getBooks: builder.query<Book[], void>({
-            query: () => `books`,
-            providesTags: ['Book']
+            query: () => `books`
         }),
         getBook: builder.query<Book, number>({
             query: (isbn) => `books/${isbn}`

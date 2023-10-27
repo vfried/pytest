@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { bookApi } from './service/bookApi'
 import { apiService } from './service/api'
-import { moreBooksReducer } from './moreBook/MoreBook.reducer'
+import { moreBooksReducer } from './moreBook/MoreBook.slice'
 import { TypedUseSelectorHook, useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 
@@ -10,8 +10,6 @@ const store = configureStore({
         [apiService.reducerPath]: apiService.reducer,
         [bookApi.reducerPath]: bookApi.reducer,
         moreBooks: moreBooksReducer
-        //books: booksReducer
-        // users: usersReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(apiService.middleware)

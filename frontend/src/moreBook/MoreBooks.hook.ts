@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import moreBooksClient from "../service/moreBooksApi";
 import { useDispatch } from "react-redux";
-import { setMoreBooks } from "./MoreBook.reducer";
+import { setMoreBooks } from "./MoreBook.slice";
 import { useAppSelector } from "../store";
 
 export default function useMoreBooks() {
